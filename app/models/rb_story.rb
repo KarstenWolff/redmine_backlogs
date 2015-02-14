@@ -225,7 +225,7 @@ class RbStory < Issue
     # method. Comparing to nil should be safe.
     return notsized if story_points == nil || story_points.blank?
     return 'S' if story_points == 0
-    return story_points.to_s
+    return story_points.nil? ? "" : "%g" % [story_points]
   end
 
   def update_and_position!(params)
