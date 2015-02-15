@@ -238,13 +238,15 @@ RB.UserFilter = RB.Object.create({
   },
 
   updateTasks: function() {
+    var showClosedTasks = this.el.multiselect("widget").find(":checkbox[value='t']").is(':checked');
     var me = this;
     RB.$(".task").each(function() {
+      var isClosed = RB.$(this).hasClass('closed');
       var task_ownerid = null;
       try{
         task_ownerid = RB.$(".assigned_to_id .v", this).text();
       } catch(e){ return; }
-      if (!task_ownerid || me.el.multiselect("widget").find(":checkbox[value='"+task_ownerid+"']").is(':checked')) {
+      if ((showClosedTasks || !isClosed) && ( !task_ownerid || me.el.multiselect("widget").find(":checkbox[value='"+task_ownerid+"']").is(':checked'))) {
         RB.$(this).show();
       }else {
         RB.$(this).hide();
