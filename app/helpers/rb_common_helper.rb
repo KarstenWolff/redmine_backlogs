@@ -163,7 +163,7 @@ filter:progid:DXImageTransform.Microsoft.Gradient(Enabled=1,GradientType=0,Start
   end
 
   def remaining_hours_or_empty(item)
-    item.remaining_hours.blank? || item.remaining_hours==0 ? "" : item.remaining_hours
+    item.remaining_hours.blank? || item.remaining_hours==0 ? "" :  "%g" % [item.remaining_hours]
   end
 
   def workdays(start_day, end_day)
